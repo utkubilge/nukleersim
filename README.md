@@ -5,8 +5,11 @@ Bu projenin amacı Türkiyede oluşabilecek nükleer felaketlerin ne kadar hasar
 ## Kullanılan Teknolojiler:
 
 -Nodejs
+
 -React.js
+
 -github-pages
+
 -googlemaps-api
 
 ## Proje Takım Üyeleri
