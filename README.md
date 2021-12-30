@@ -1,3 +1,5 @@
+https://utkubilge.github.io/nukleersim/
+
 # Nükleer Similasyon Projesi
 
 Bu projenin amacı Türkiyede oluşabilecek nükleer felaketlerin ne kadar hasara yol açabileceğini haritada göstermek.
