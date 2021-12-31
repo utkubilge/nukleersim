@@ -12,7 +12,7 @@ Bu projenin amacı Türkiyede oluşabilecek nükleer felaketlerin ne kadar hasar
 
 -github-pages
 
--googlemaps-api
+-npm install @googlemaps/react-wrapper
 
 ## Proje Takım Üyeleri
 
