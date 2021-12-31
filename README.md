@@ -1,3 +1,5 @@
+https://utkubilge.github.io/nukleersim/
+
 # Nükleer Similasyon Projesi
 
 Bu projenin amacı Türkiyede oluşabilecek nükleer felaketlerin ne kadar hasara yol açabileceğini haritada göstermek.
@@ -10,7 +12,7 @@ Bu projenin amacı Türkiyede oluşabilecek nükleer felaketlerin ne kadar hasar
 
 -github-pages
 
--googlemaps-api
+-npm install @googlemaps/react-wrapper
 
 ## Proje Takım Üyeleri
 
