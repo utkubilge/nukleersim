@@ -92,7 +92,7 @@ const App: React.VFC = () => {
       <button onClick={() => setClicks([])}>Clear</button>
     </div>
   );
-
+        //drawing circles
   return (
     <div style={{ display: "flex", height: "100%" }}>
       <Wrapper apiKey={"AIzaSyBvkjdTESoTzAuLz9_TLw-z5GfGAw22Uj4"} render={render}>
@@ -103,9 +103,17 @@ const App: React.VFC = () => {
           zoom={zoom}
           style={{ flexGrow: "1", height: "100%" }}
         >
-          {clicks.map((latLng, i) => (
-            <Marker key={i} position={latLng} />
-          ))}
+          
+          
+          {clicks.map(
+            (latLng, i) => (<Marker key={i} center={latLng} radius={300000} fillColor={"#00FF00"}/>)
+          )}
+          {clicks.map(
+            (latLng, i) => (<Marker key={i} center={latLng} radius={200000} fillColor={"#FFFF00"}/>)
+          )}
+          {clicks.map(
+            (latLng, i) => (<Marker key={i} center={latLng} radius={100000} fillColor={"#FF0000"}/>)
+          )}
         </Map>
       </Wrapper>
       {/* Basic form for controlling center and zoom of map. */}
@@ -171,13 +179,13 @@ const Map: React.FC<MapProps> = ({
     </>
   );
 };
-
-const Marker: React.FC<google.maps.MarkerOptions> = (options) => {
-  const [marker, setMarker] = React.useState<google.maps.Marker>();
+//marker aka circle maker change this and make it a function
+const Marker: React.FC<google.maps.CircleOptions> = (options) => {
+  const [marker, setMarker] = React.useState<google.maps.Circle>();
 
   React.useEffect(() => {
     if (!marker) {
-      setMarker(new google.maps.Marker());
+      setMarker(new google.maps.Circle());
     }
 
     // remove marker from map on unmount
