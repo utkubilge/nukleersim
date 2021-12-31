@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/nukleersim/static/css/main.c32e7346.css",
-    "main.js": "/nukleersim/static/js/main.90ae822e.js",
+    "main.css": "/nukleersim/static/css/main.f8ed1269.css",
+    "main.js": "/nukleersim/static/js/main.d57a497f.js",
     "index.html": "/nukleersim/index.html",
-    "main.c32e7346.css.map": "/nukleersim/static/css/main.c32e7346.css.map",
-    "main.90ae822e.js.map": "/nukleersim/static/js/main.90ae822e.js.map"
+    "main.f8ed1269.css.map": "/nukleersim/static/css/main.f8ed1269.css.map",
+    "main.d57a497f.js.map": "/nukleersim/static/js/main.d57a497f.js.map"
   },
   "entrypoints": [
-    "static/css/main.c32e7346.css",
-    "static/js/main.90ae822e.js"
+    "static/css/main.f8ed1269.css",
+    "static/js/main.d57a497f.js"
   ]
 }
