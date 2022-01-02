@@ -22,6 +22,7 @@ import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { createCustomEqual } from "fast-equals";
 import { isLatLngLiteral } from "@googlemaps/typescript-guards";
 
+const api_secret: string = process.env.REACT_APP_SECRET ?? 'default'
 const render = (status: Status) => {
   return <h1>{status}</h1>;
 };
@@ -95,7 +96,7 @@ const App: React.VFC = () => {
         //drawing circles
   return (
     <div style={{ display: "flex", height: "100%" }}>
-      <Wrapper apiKey={"AIzaSyBvkjdTESoTzAuLz9_TLw-z5GfGAw22Uj4"} render={render}>
+      <Wrapper apiKey={api_secret} render={render}>
         <Map
           center={center}
           onClick={onClick}
