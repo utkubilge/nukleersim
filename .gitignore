@@ -12,6 +12,7 @@
 /build
 
 # misc
+*.bat
 .DS_Store
 .env
 .env.local
