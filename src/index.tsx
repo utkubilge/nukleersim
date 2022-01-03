@@ -93,7 +93,7 @@ const App: React.VFC = () => {
       <button onClick={() => setClicks([])}>Clear</button>
     </div>
   );
-        //drawing circles
+  //drawing circles
   return (
     <div style={{ display: "flex", height: "100%" }}>
       <Wrapper apiKey={api_secret} render={render}>
@@ -104,16 +104,16 @@ const App: React.VFC = () => {
           zoom={zoom}
           style={{ flexGrow: "1", height: "100%" }}
         >
-          
-          
+
+
           {clicks.map(
-            (latLng, i) => (<Marker key={i} center={latLng} radius={300000} fillColor={"#00FF00"}/>)
+            (latLng, i) => (<Marker key={i} center={latLng} radius={300000} fillColor={"#00FF00"} />)
           )}
           {clicks.map(
-            (latLng, i) => (<Marker key={i} center={latLng} radius={200000} fillColor={"#FFFF00"}/>)
+            (latLng, i) => (<Marker key={i} center={latLng} radius={200000} fillColor={"#FFFF00"} />)
           )}
           {clicks.map(
-            (latLng, i) => (<Marker key={i} center={latLng} radius={100000} fillColor={"#FF0000"}/>)
+            (latLng, i) => (<Marker key={i} center={latLng} radius={100000} fillColor={"#FF0000"} />)
           )}
         </Map>
       </Wrapper>
@@ -245,4 +245,4 @@ window.addEventListener("DOMContentLoaded", () => {
   ReactDom.render(<App />, document.getElementById("root"));
 });
 
-export {};
+export { };
