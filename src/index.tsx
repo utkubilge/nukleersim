@@ -1,21 +1,4 @@
-/*
- * Copyright 2021 Google LLC. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-/* eslint-disable no-undef, @typescript-eslint/no-unused-vars, no-unused-vars */
 import "./style.css";
-
 import * as React from "react";
 import * as ReactDom from "react-dom";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
@@ -27,45 +10,43 @@ const render = (status: Status) => {
   return <h1>{status}</h1>;
 };
 
+
+//main runner
 const App: React.VFC = () => {
+  //constonant functions
   const [clicks, setClicks] = React.useState<google.maps.LatLng[]>([]);
   const [zoom, setZoom] = React.useState(6); // initial zoom
   const [center, setCenter] = React.useState<google.maps.LatLngLiteral>({
     lat: 39,
-    lng: 35,
+    lng: 35
   });
-
+  const [pow, setPow] = React.useState(10);
   const onClick = (e: google.maps.MapMouseEvent) => {
-    // avoid directly mutating state
     setClicks([...clicks, e.latLng!]);
   };
-
   const onIdle = (m: google.maps.Map) => {
     console.log("onIdle");
     setZoom(m.getZoom()!);
     setCenter(m.getCenter()!.toJSON());
+    setPow(pow);
   };
 
+  //gui div buttons
   const form = (
     <div
       style={{
-        padding: "1rem",
+
+        padding: "1%",
         boxSizing: "border-box",
         flexBasis: "250px",
         height: "100%",
         overflow: "auto",
-      }}
-    >
-      <label htmlFor="zoom">Zoom</label>
-      <input
-        type="number"
-        id="zoom"
-        name="zoom"
-        value={zoom}
-        onChange={(event) => setZoom(Number(event.target.value))}
-      />
-      <br />
-      <label htmlFor="lat">Latitude</label>
+        background: "#ebe9e4"
+      }}>
+
+
+      {/* enlem */}
+      <label htmlFor="lat">Enlem</label>
       <input
         type="number"
         id="lat"
@@ -75,8 +56,10 @@ const App: React.VFC = () => {
           setCenter({ ...center, lat: Number(event.target.value) })
         }
       />
-      <br />
-      <label htmlFor="lng">Longitude</label>
+      <br /> <br />
+
+      {/* boylam */}
+      <label htmlFor="lng">Boylam</label>
       <input
         type="number"
         id="lng"
@@ -86,14 +69,30 @@ const App: React.VFC = () => {
           setCenter({ ...center, lng: Number(event.target.value) })
         }
       />
-      <h3>{clicks.length === 0 ? "Click on map to add markers" : "Clicks"}</h3>
+      <br /><br />
+
+      {/* güç */}
+      <label htmlFor="pow">Patlayıcı Gücü (KiloTon)</label>
+      <input
+        type="number"
+        id="pow"
+        name="pow"
+        value={pow}
+        onChange={(event) => setPow(Number(event.target.value))
+        }
+      />
+      <br /><br />
+
+      <h3>{clicks.length === 0 ? "Haritaya tıklayarak merkez seçin" : "Merkezler"}</h3>
       {clicks.map((latLng, i) => (
-        <pre key={i}>{JSON.stringify(latLng.toJSON(), null, 2)}</pre>
+        <pre key={i}>{JSON.stringify(latLng.toJSON(), null, 2)} <br />fireball{((Math.pow(pow*1000,0.4)*145/3.3)/10)} <br /> hv blast{(Math.pow(pow*1000,0.33)*0.28)*100}</pre>
       ))}
-      <button onClick={() => setClicks([])}>Clear</button>
+      <br />
+      <button onClick={() => setClicks([])}>Merkezleri kaldır</button>
     </div>
   );
-  //drawing circles
+
+  //returning app
   return (
     <div style={{ display: "flex", height: "100%" }}>
       <Wrapper apiKey={api_secret} render={render}>
@@ -105,15 +104,15 @@ const App: React.VFC = () => {
           style={{ flexGrow: "1", height: "100%" }}
         >
 
-
           {clicks.map(
-            (latLng, i) => (<Marker key={i} center={latLng} radius={300000} fillColor={"#00FF00"} />)
+            (latLng, i) => (<Marker key={i} center={latLng} radius={1000} fillColor={"#00FF00"} />)
           )}
           {clicks.map(
-            (latLng, i) => (<Marker key={i} center={latLng} radius={200000} fillColor={"#FFFF00"} />)
+            (latLng, i) => (<Marker key={i} center={latLng} radius={(Math.pow(pow*1000,0.33)*0.28)*100} fillColor={"#FFFF00"} />)
           )}
+          {/* fireball */}
           {clicks.map(
-            (latLng, i) => (<Marker key={i} center={latLng} radius={100000} fillColor={"#FF0000"} />)
+            (latLng, i) => (<Marker key={i} center={latLng} radius={(Math.pow(pow*1000,0.4)*145/3.3)/10} fillColor={"#FF0000"} />)
           )}
         </Map>
       </Wrapper>
@@ -121,7 +120,10 @@ const App: React.VFC = () => {
       {form}
     </div>
   );
+
 };
+
+//map options
 interface MapProps extends google.maps.MapOptions {
   style: { [key: string]: string };
   onClick?: (e: google.maps.MapMouseEvent) => void;
@@ -240,6 +242,7 @@ function useDeepCompareEffectForMaps(
 ) {
   React.useEffect(callback, dependencies.map(useDeepCompareMemoize));
 }
+
 
 window.addEventListener("DOMContentLoaded", () => {
   ReactDom.render(<App />, document.getElementById("root"));
