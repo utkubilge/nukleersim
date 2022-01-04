@@ -15,12 +15,13 @@ const render = (status: Status) => {
 const App: React.VFC = () => {
   //constonant functions
   const [clicks, setClicks] = React.useState<google.maps.LatLng[]>([]);
-  const [zoom, setZoom] = React.useState(6); // initial zoom
+  const [zoom, setZoom] = React.useState(15); // initial zoom
   const [center, setCenter] = React.useState<google.maps.LatLngLiteral>({
-    lat: 39,
-    lng: 35
+    lat: 37.886386120532155,
+    lng: 30.866635632735136
   });
   const [pow, setPow] = React.useState(10);
+  const [p, setp] = React.useState(10);
   const onClick = (e: google.maps.MapMouseEvent) => {
     setClicks([...clicks, e.latLng!]);
   };
@@ -30,6 +31,16 @@ const App: React.VFC = () => {
     setCenter(m.getCenter()!.toJSON());
     setPow(pow);
   };
+
+  
+    function fireball(p) {return Math.round(((Math.pow(pow*1000,0.4)*145/3.3)/10))}
+    function hblast(p) {return Math.round((Math.pow(p * 1000, 0.33) * 0.28) * 100)}
+    function mblast(p) {return Math.round(Math.pow(p*400,0.33)*70)}
+    function radiation(p) {return Math.round(Math.pow(p*400,0.19)*250)}
+    function thermal(p) {return Math.round(Math.pow(p*400,0.41)*50)}
+    function lblast(p) {return Math.round((Math.pow(p*400,0.33)*70*2.5))}
+  
+
 
   //gui div buttons
   const form = (
@@ -78,24 +89,37 @@ const App: React.VFC = () => {
         id="pow"
         name="pow"
         value={pow}
-        onChange={(event) => setPow(Number(event.target.value))
-        }
+        onChange={(event) => setPow(Number(event.target.value))}
       />
       <br /><br />
 
+      {/* logging */}
       <h3>{clicks.length === 0 ? "Haritaya tıklayarak merkez seçin" : "Merkezler"}</h3>
-      {clicks.map((latLng, i) => (
-        <pre key={i}>{JSON.stringify(latLng.toJSON(), null, 2)} <br />fireball{((Math.pow(pow*1000,0.4)*145/3.3)/10)} <br /> hv blast{(Math.pow(pow*1000,0.33)*0.28)*100}</pre>
-      ))}
-      <br />
       <button onClick={() => setClicks([])}>Merkezleri kaldır</button>
+      {clicks.map((latLng, i) => (
+        <pre key={i}>
+          {/* {JSON.stringify(latLng.toJSON(), null, 2)}
+          {JSON.stringify(pow, null, 2)} */}
+          Enlem: {center.lat.toFixed(6)} <br />
+          Boylam: {center.lng.toFixed(6)} <br /><br /><br />
+          Fireball: {fireball(pow)} metre.({Math.round((fireball(pow)/2)/3.14) }km²)<br /> <br />
+          Heavy blast: {hblast(pow)} metre.({Math.round((hblast(pow)/2)/3.14) }km²) <br /><br />
+          Moderate blast: {mblast(pow)} metre.<br />({Math.round((mblast(pow)/2)/3.14) }km²) <br /><br />
+          Radiation: {radiation(pow)} metre.({Math.round((radiation(pow)/2)/3.14 )}km²)<br /><br />
+          Thermal: {thermal(pow)} metre.({Math.round((thermal(pow)/2)/3.14) }km²)<br /><br />
+          Light Blast: {lblast(pow)} metre.({Math.round((lblast(pow)/2)/3.14 )}km²)<br /> 
+        </pre>
+      ))}
+      
     </div>
   );
+  
 
   //returning app
   return (
     <div style={{ display: "flex", height: "100%" }}>
-      <Wrapper apiKey={api_secret} render={render}>
+      <Wrapper apiKey={"AIzaSyBvkjdTESoTzAuLz9_TLw-z5GfGAw22Uj4"} render={render}>
+        
         <Map
           center={center}
           onClick={onClick}
@@ -103,17 +127,18 @@ const App: React.VFC = () => {
           zoom={zoom}
           style={{ flexGrow: "1", height: "100%" }}
         >
-
-          {clicks.map(
-            (latLng, i) => (<Marker key={i} center={latLng} radius={1000} fillColor={"#00FF00"} />)
-          )}
-          {clicks.map(
-            (latLng, i) => (<Marker key={i} center={latLng} radius={(Math.pow(pow*1000,0.33)*0.28)*100} fillColor={"#FFFF00"} />)
-          )}
+          {/* lblast */}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={lblast(pow)} fillColor={"#565d69"} strokeWeight={1} />))}
+          {/* thermal */}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={thermal(pow)} fillColor={"#ffc100"} strokeWeight={1}/>))}
+          {/* radiation */}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={radiation(pow)} fillColor={"#00FF00"} strokeWeight={1}/>))}
+          {/* mblast radius */}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={mblast(pow)} fillColor={"#ff7400"} strokeWeight={1}/>))}
+          {/* hblast radius */}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={hblast(pow)} fillColor={"#ff4d00"} strokeWeight={1}/>))}
           {/* fireball */}
-          {clicks.map(
-            (latLng, i) => (<Marker key={i} center={latLng} radius={(Math.pow(pow*1000,0.4)*145/3.3)/10} fillColor={"#FF0000"} />)
-          )}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={fireball(pow)} fillColor={"#ff0000"} strokeWeight={1}/>))}
         </Map>
       </Wrapper>
       {/* Basic form for controlling center and zoom of map. */}
