@@ -33,12 +33,21 @@ const App: React.VFC = () => {
   };
 
   
+<<<<<<< HEAD
     function fireball(p) {return Math.round(((Math.pow(pow*1000,0.4)*145/3.3)/10))}
     function hblast(p) {return Math.round((Math.pow(p * 1000, 0.33) * 0.28) * 100)}
     function mblast(p) {return Math.round(Math.pow(p*400,0.33)*70)}
     function radiation(p) {return Math.round(Math.pow(p*400,0.19)*250)}
     function thermal(p) {return Math.round(Math.pow(p*400,0.41)*50)}
     function lblast(p) {return Math.round((Math.pow(p*400,0.33)*70*2.5))}
+=======
+    function fireball(p) {return ((Math.pow(pow*1000,0.4)*145/3.3)/10)}
+    function hblast(p) {return (Math.pow(p * 1000, 0.33) * 0.28) * 100}
+    function mblast(p) {return Math.pow(p*400,0.33)*70}
+    function radiation(p) {return Math.pow(p*400,0.19)*250}
+    function thermal(p) {return Math.pow(p*400,0.41)*50}
+    function lblast(p) {return (Math.pow(p*400,0.33)*70*2.5)}
+>>>>>>> 938c57066f2ff9acce6cb852f0d3d5f68a9108f4
   
 
 
@@ -98,6 +107,7 @@ const App: React.VFC = () => {
       <button onClick={() => setClicks([])}>Merkezleri kaldır</button>
       {clicks.map((latLng, i) => (
         <pre key={i}>
+<<<<<<< HEAD
           {/* {JSON.stringify(latLng.toJSON(), null, 2)}
           {JSON.stringify(pow, null, 2)} */}
           Enlem: {center.lat.toFixed(6)} <br />
@@ -108,6 +118,18 @@ const App: React.VFC = () => {
           Radiation: {radiation(pow)} metre.({Math.round((radiation(pow)/2)/3.14 )}km²)<br /><br />
           Thermal: {thermal(pow)} metre.({Math.round((thermal(pow)/2)/3.14) }km²)<br /><br />
           Light Blast: {lblast(pow)} metre.({Math.round((lblast(pow)/2)/3.14 )}km²)<br /> 
+=======
+          {JSON.stringify(latLng.toJSON(), null, 2)}
+          {JSON.stringify(pow, null, 2)}
+          Enlem: {center.lat.toFixed(6)} <br />
+          Boylam: {center.lng.toFixed(6)} <br />
+          Fireball: {fireball(pow)} <br /> 
+          Heavy blast: {thermal(pow)} <br />
+          Moderate blast: {mblast(pow)} <br />
+          Radiation: {radiation(pow)} <br />
+          Thermal: {thermal(pow)} <br />
+          Light Blast: {lblast(pow)} <br /> 
+>>>>>>> 938c57066f2ff9acce6cb852f0d3d5f68a9108f4
         </pre>
       ))}
       
@@ -118,7 +140,11 @@ const App: React.VFC = () => {
   //returning app
   return (
     <div style={{ display: "flex", height: "100%" }}>
+<<<<<<< HEAD
       <Wrapper apiKey={"AIzaSyBvkjdTESoTzAuLz9_TLw-z5GfGAw22Uj4"} render={render}>
+=======
+      <Wrapper apiKey={api_secret} render={render}>
+>>>>>>> 938c57066f2ff9acce6cb852f0d3d5f68a9108f4
         
         <Map
           center={center}
