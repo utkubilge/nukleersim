@@ -120,12 +120,9 @@ const App: React.VFC = () => {
   //returning app
   return (
     <div style={{ display: "flex", height: "100%" }}>
-<<<<<<< Updated upstream
+
       <Wrapper apiKey={api_secret} render={render}>
-=======
-      <Wrapper apiKey={"AIzaSyBvkjdTESoTzAuLz9_TLw-z5GfGAw22Uj4"} render={render}>
->>>>>>> Stashed changes
-        
+
         <Map
           center={center}
           onClick={onClick}
