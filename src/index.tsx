@@ -46,7 +46,7 @@ const App: React.VFC = () => {
   const form = (
     <div
       style={{
-
+        
         padding: "1%",
         boxSizing: "border-box",
         flexBasis: "250px",
@@ -54,6 +54,8 @@ const App: React.VFC = () => {
         overflow: "auto",
         background: "#ebe9e4"
       }}>
+<h3>Made by Utku Baha Bilge, Emirhan Portakal</h3>
+<br /><br />
 
 
       {/* enlem */}
@@ -118,7 +120,11 @@ const App: React.VFC = () => {
   //returning app
   return (
     <div style={{ display: "flex", height: "100%" }}>
+<<<<<<< Updated upstream
       <Wrapper apiKey={api_secret} render={render}>
+=======
+      <Wrapper apiKey={"AIzaSyBvkjdTESoTzAuLz9_TLw-z5GfGAw22Uj4"} render={render}>
+>>>>>>> Stashed changes
         
         <Map
           center={center}
