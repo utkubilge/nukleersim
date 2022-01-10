@@ -44,17 +44,20 @@ const App: React.VFC = () => {
 
   //gui div buttons
   const form = (
-    <div
+    <div className="formdiv"
       style={{
         
         padding: "1%",
         boxSizing: "border-box",
+        overflow: "auto",
         flexBasis: "250px",
         height: "100%",
-        overflow: "auto",
-        background: "#ebe9e4"
+        background: "#ebe9e4",
+        wordWrap: "break-word"
       }}>
-<h3>Made by Utku Baha Bilge, Emirhan Portakal</h3>
+<h1>Nükleer Simülasyon</h1>
+<div>Baha Utku Bilge ve </div>  
+<div>Emirhan Portakal tarafından yapılmıştır</div>
 <br /><br />
 
 
@@ -104,12 +107,12 @@ const App: React.VFC = () => {
           {JSON.stringify(pow, null, 2)} */}
           Enlem: {center.lat.toFixed(6)} <br />
           Boylam: {center.lng.toFixed(6)} <br /><br /><br />
-          Fireball: {fireball(pow)} metre.({Math.round((fireball(pow)/2)/3.14) }km²)<br /> <br />
-          Heavy blast: {hblast(pow)} metre.({Math.round((hblast(pow)/2)/3.14) }km²) <br /><br />
-          Moderate blast: {mblast(pow)} metre.<br />({Math.round((mblast(pow)/2)/3.14) }km²) <br /><br />
-          Radiation: {radiation(pow)} metre.({Math.round((radiation(pow)/2)/3.14 )}km²)<br /><br />
-          Thermal: {thermal(pow)} metre.({Math.round((thermal(pow)/2)/3.14) }km²)<br /><br />
-          Light Blast: {lblast(pow)} metre.({Math.round((lblast(pow)/2)/3.14 )}km²)<br /> 
+          Alev Topu: {fireball(pow)} metre.({Math.round((fireball(pow)/2)/3.14) }km²)<br /> <br />
+          Ağır Tahrip: {hblast(pow)} metre.({Math.round((hblast(pow)/2)/3.14) }km²) <br /><br />
+          Orta Düzeyde Tahrip: {mblast(pow)} metre.<br />({Math.round((mblast(pow)/2)/3.14) }km²) <br /><br />
+          Radyasyon Alanı: {radiation(pow)} metre.({Math.round((radiation(pow)/2)/3.14 )}km²)<br /><br />
+          Termal Alan: {thermal(pow)} metre.({Math.round((thermal(pow)/2)/3.14) }km²)<br /><br />
+          Az Düzeyde Tahrip: {lblast(pow)} metre.({Math.round((lblast(pow)/2)/3.14 )}km²)<br /> 
         </pre>
       ))}
       
