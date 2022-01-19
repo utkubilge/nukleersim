@@ -32,33 +32,32 @@ const App: React.VFC = () => {
     setPow(pow);
   };
 
-  
-    function fireball(p) {return Math.round(((Math.pow(pow*1000,0.4)*145/3.3)/10))}
-    function hblast(p) {return Math.round((Math.pow(p * 1000, 0.33) * 0.28) * 100)}
-    function mblast(p) {return Math.round(Math.pow(p*400,0.33)*70)}
-    function radiation(p) {return Math.round(Math.pow(p*400,0.19)*250)}
-    function thermal(p) {return Math.round(Math.pow(p*400,0.41)*50)}
-    function lblast(p) {return Math.round((Math.pow(p*400,0.33)*70*2.5))}
-  
+
+  function fireball(p) { return Math.round(((Math.pow(pow * 1000, 0.4) * 145 / 3.3) / 10)) }
+  function hblast(p) { return Math.round((Math.pow(p * 1000, 0.33) * 0.28) * 100) }
+  function mblast(p) { return Math.round(Math.pow(p * 400, 0.33) * 70) }
+  function radiation(p) { return Math.round(Math.pow(p * 400, 0.19) * 250) }
+  function thermal(p) { return Math.round(Math.pow(p * 400, 0.41) * 50) }
+  function lblast(p) { return Math.round((Math.pow(p * 400, 0.33) * 70 * 2.5)) }
+
 
 
   //gui div buttons
   const form = (
     <div className="formdiv"
       style={{
-        
+
         padding: "1%",
         boxSizing: "border-box",
-        overflow: "auto",
-        flexBasis: "250px",
         height: "100%",
         background: "#ebe9e4",
-        wordWrap: "break-word"
+        width: "15%",
+        flexBasis: "250px"
       }}>
-<h1>Nükleer Simülasyon</h1>
-<div>Baha Utku Bilge ve </div>  
-<div>Emirhan Portakal tarafından yapılmıştır</div>
-<br /><br />
+      <h1>Nükleer Simülasyon</h1>
+      <h3>Baha Utku Bilge ve </h3>
+      <h3>Emirhan Portakal tarafından yapılmıştır</h3>
+      <br /><br />
 
 
       {/* enlem */}
@@ -88,7 +87,8 @@ const App: React.VFC = () => {
       <br /><br />
 
       {/* güç */}
-      <label htmlFor="pow">Patlayıcı Gücü (KiloTon)</label>
+      <label htmlFor="pow">Patlayıcı Gücü(KiloTon)</label>
+
       <input
         type="number"
         id="pow"
@@ -96,29 +96,41 @@ const App: React.VFC = () => {
         value={pow}
         onChange={(event) => setPow(Number(event.target.value))}
       />
+      
+
+      <br /><br />
+
+      <label className="cars">Gerçek Bomba Değerleri</label>
+      <select onChange={(event) =>setPow(Number(event.target.value))}>
+      <option value="10" >2013'de Kuzey Kore Tarafından Denenen Bomba (10kt)</option>
+        <option value="15" >"Little Boy" Hiroşima Bombası (15kt)</option>
+        <option value="20">"Fat Man" Nagasaki Bombası (20kt)</option>
+        <option value="50">"Tzar Bomba" Sovietler Tarafından Yapılan Bomba (50kt)</option>
+        <option value="100">"Tzar Bomba 602" Soviyetler Tarafından Planlanan En Güçlü Bomba (100kt)</option>
+      </select>
       <br /><br />
 
       {/* logging */}
       <h3>{clicks.length === 0 ? "Haritaya tıklayarak merkez seçin" : "Merkezler"}</h3>
       <button onClick={() => setClicks([])}>Merkezleri kaldır</button>
       {clicks.map((latLng, i) => (
-        <pre key={i}>
-          {/* {JSON.stringify(latLng.toJSON(), null, 2)}
-          {JSON.stringify(pow, null, 2)} */}
-          Enlem: {center.lat.toFixed(6)} <br />
-          Boylam: {center.lng.toFixed(6)} <br /><br /><br />
-          Alev Topu: {fireball(pow)} metre.({Math.round((fireball(pow)/2)/3.14) }km²)<br /> <br />
-          Ağır Tahrip: {hblast(pow)} metre.({Math.round((hblast(pow)/2)/3.14) }km²) <br /><br />
-          Orta Düzeyde Tahrip: {mblast(pow)} metre.<br />({Math.round((mblast(pow)/2)/3.14) }km²) <br /><br />
-          Radyasyon Alanı: {radiation(pow)} metre.({Math.round((radiation(pow)/2)/3.14 )}km²)<br /><br />
-          Termal Alan: {thermal(pow)} metre.({Math.round((thermal(pow)/2)/3.14) }km²)<br /><br />
-          Az Düzeyde Tahrip: {lblast(pow)} metre.({Math.round((lblast(pow)/2)/3.14 )}km²)<br /> 
+        <div className="info">
+        <pre key={i} style={{display:"block",boxShadow:"0 0 5px 0px",padding:"1px 4px", backgroundColor:"#bbbbbb"}}>
+          <p>Enlem: {center.lat.toFixed(6)}</p> 
+          <p>Boylam: {center.lng.toFixed(6)} </p>
+          <p style={{color: "#ff0000"}}>Alev Topu: {fireball(pow)} metre.({Math.round((fireball(pow) / 2) / 3.14)}km²)</p>
+          <p style={{color: "#ff4d00"}}>Ağır Tahrip: {hblast(pow)} metre.({Math.round((hblast(pow) / 2) / 3.14)}km²) </p>
+          <p style={{color: "#ff7400"}}>Orta Düzeyde Tahrip: {mblast(pow)} metre.<br />({Math.round((mblast(pow) / 2) / 3.14)}km²)</p>
+          <p style={{color: "#00cc00"}}>Radyasyon Alanı: {radiation(pow)} metre.({Math.round((radiation(pow) / 2) / 3.14)}km²)</p>
+          <p style={{color: "#dd9000"}}>Termal Alan: {thermal(pow)} metre.({Math.round((thermal(pow) / 2) / 3.14)}km²)</p>
+          <p style={{color: "#565d69"}}>Az Düzeyde Tahrip: {lblast(pow)} metre.({Math.round((lblast(pow) / 2) / 3.14)}km²)</p>
         </pre>
+        </div>
       ))}
-      
+
     </div>
   );
-  
+
 
   //returning app
   return (
@@ -134,17 +146,17 @@ const App: React.VFC = () => {
           style={{ flexGrow: "1", height: "100%" }}
         >
           {/* lblast */}
-          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={lblast(pow)} fillColor={"#565d69"} strokeWeight={1} />))}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={lblast(pow)} fillColor={"#565d69"} strokeWeight={1} /> ))}
           {/* thermal */}
-          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={thermal(pow)} fillColor={"#ffc100"} strokeWeight={1}/>))}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={thermal(pow)} fillColor={"#ffc100"} strokeWeight={1} />))}
           {/* radiation */}
-          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={radiation(pow)} fillColor={"#00FF00"} strokeWeight={1}/>))}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={radiation(pow)} fillColor={"#00FF00"} strokeWeight={1} />))}
           {/* mblast radius */}
-          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={mblast(pow)} fillColor={"#ff7400"} strokeWeight={1}/>))}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={mblast(pow)} fillColor={"#ff7400"} strokeWeight={1} />))}
           {/* hblast radius */}
-          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={hblast(pow)} fillColor={"#ff4d00"} strokeWeight={1}/>))}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={hblast(pow)} fillColor={"#ff4d00"} strokeWeight={1} />))}
           {/* fireball */}
-          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={fireball(pow)} fillColor={"#ff0000"} strokeWeight={1}/>))}
+          {clicks.map((latLng, i) => (<Marker key={i} center={latLng} radius={fireball(pow)} fillColor={"#ff0000"} strokeWeight={1} />))}
         </Map>
       </Wrapper>
       {/* Basic form for controlling center and zoom of map. */}
