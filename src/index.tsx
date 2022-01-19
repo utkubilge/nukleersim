@@ -102,11 +102,13 @@ const App: React.VFC = () => {
 
       <label className="cars">Gerçek Bomba Değerleri</label>
       <select onChange={(event) =>setPow(Number(event.target.value))}>
-      <option value="10" >2013'de Kuzey Kore Tarafından Denenen Bomba (10kt)</option>
-        <option value="15" >"Little Boy" Hiroşima Bombası (15kt)</option>
-        <option value="20">"Fat Man" Nagasaki Bombası (20kt)</option>
-        <option value="50">"Tzar Bomba" Sovietler Tarafından Yapılan Bomba (50kt)</option>
-        <option value="100">"Tzar Bomba 602" Soviyetler Tarafından Planlanan En Güçlü Bomba (100kt)</option>
+      <option value="10" >(2013)'de Kuzey Kore Tarafından Denenen Bomba (10kt)</option>
+        <option value="15" >(1945)"Little Boy" Hiroşima Bombası (15kt)</option>
+        <option value="20">(1945)"Fat Man" Nagasaki Bombası (20kt)</option>
+        <option value="50000">(1961)"Tzar Bomba" Soviet Rusya tarafından geliştirilen en büyük nükleer silah (50mt)</option>
+        <option value="100000">(?)"Tzar Bomba 602" Soviet Rusya tarafından planlanan en büyük nükleer silah (100mt)</option>
+        <option value="21">(1945)"Gadget" Trinity kod adlı ilk test edilen nükleer silah (21kt)</option>
+        <option value="15000">(1954)"Amerika tarafından geliştirilen en büyük nükleer silah (15mt)</option>
       </select>
       <br /><br />
 
